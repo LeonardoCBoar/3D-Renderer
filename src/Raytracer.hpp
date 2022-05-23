@@ -10,6 +10,7 @@
 
 #include "Vector.hpp"
 #include "Geometry.hpp"
+#include "Light.hpp"
 
 class Raytracer
 {
@@ -23,6 +24,8 @@ public:
     const double min_render_dist;
     const double max_render_dist;
 
+    SceneLight light;
+
     Raytracer(const Vector3d& camera_pos,const Vector2u16& viewport_size,const Vector2u16& screen_size,const double viewport_dist,
               const double min_render_dist = 1, const double max_render_dist = DBL_MAX);
     Vector3d screen_to_viewport(const Vector2i16& screen_pos) const;
@@ -31,6 +34,12 @@ public:
     
     std::vector<Sphere> spheres
     {
+        Sphere
+        {
+            Vector3d{0,-1,2},
+            0.5,
+            SDL_Color{255,255,255,255}
+        },
         Sphere
         {
             Vector3d{0,-1,3},
@@ -48,6 +57,11 @@ public:
             Vector3d{-2,0,4},
             1,
             SDL_Color{0,255,0,255}
+        },
+        Sphere {
+            Vector3d{0,-5001,0},
+            5000,
+            SDL_Color{255,255,0,255}
         }
     };
 };

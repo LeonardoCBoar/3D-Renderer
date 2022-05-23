@@ -14,8 +14,8 @@ DoublePair quadratic_roots(const double a, const double b, const double c)
     
     const double delta_sqrt = sqrt(delta);
 
-    double root1 = -b + delta_sqrt/(2*a);
-    double root2 = -b - delta_sqrt/(2*a);
+    double root1 = (-b + delta_sqrt)/(2*a);
+    double root2 = (-b - delta_sqrt)/(2*a);
 
     /*if(should_log)
     {
@@ -30,6 +30,12 @@ DoublePair quadratic_roots(const double a, const double b, const double c)
         return DoublePair{root1,std::nullopt};
     else
         return DoublePair{root1,root2};
+}
+
+Vector3d Sphere::normal_at_point(const Vector3d& point) const
+{
+    const Vector3d center_to_point = point - this->center;
+    return center_to_point / (center_to_point.length());
 }
 
 DoublePair Sphere::ray_intersection_dists(const Line& ray) const

@@ -51,7 +51,14 @@ SDL_Color Raytracer::raytrace(const Vector3d& ray_dir)
     }
 
     if(closest_sphere != nullptr)
-        return closest_sphere->color;
+    {
+        const Vector3d intersection_point = ray.point_at(closest_sphere_dist);
+        const Vector3d sphere_normal_at_point = closest_sphere->normal_at_point(intersection_point);
+        SDL_Color point_color = closest_sphere->color;
+
+        light.apply_all_lights(intersection_point,sphere_normal_at_point,point_color);
+        return point_color; 
+    }
     else
         return SDL_Color{0,0,0,255};
 }

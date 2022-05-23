@@ -6,6 +6,7 @@
 #include <utility>
 #include <SDL_pixels.h>
 
+using DoubleOpt    = std::optional<double>;
 using DoublePair   = std::pair<std::optional<double>  ,std::optional<double>>;
 using Vector3dPair = std::pair<std::optional<Vector3d>, std::optional<Vector3d>>;
 
@@ -27,6 +28,8 @@ public:
     Vector3d center;
     double radius;
     SDL_Color color;
+
+    Vector3d normal_at_point(const Vector3d& point) const;
     
     Vector3dPair ray_intersection_points(const Line& ray) const;
     DoublePair   ray_intersection_dists (const Line& ray) const;

@@ -12,6 +12,7 @@ add_executable(Raytracer
      Raytracer.cpp
      Geometry.cpp
      SDL_Handler.cpp
+     Light.cpp
     )
 
 target_link_libraries(Raytracer PRIVATE SDL2::SDL2 SDL2::SDL2main)

@@ -51,9 +51,25 @@ public:
         return Vector3<NumberT>(this->x / other.x, this->y / other.y, this->z / other.z);
     }
 
+    template<typename OtherNumberT>
+    Vector3<NumberT> operator / (const OtherNumberT& number) const
+    {
+        return Vector3<NumberT>(this->x / number, this->y / number, this->z / number);
+    }
+
     NumberT dot(const Vector3<NumberT>& other) const
     {
         return (this->x * other.x) + (this->y * other.y) + (this->z * other.z);
+    }
+
+    double cos_between(const Vector3<NumberT>& other) const
+    {
+        return this->dot(other)/(this->length() * other.length());
+    }
+
+    double angle_to(const Vector3<NumberT>& other) const
+    {
+        acos(this->cos_between(other));
     }
 
     float length() const
