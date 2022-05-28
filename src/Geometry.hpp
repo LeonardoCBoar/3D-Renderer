@@ -2,21 +2,28 @@
 
 #include "Vector.hpp"
 #include "Utils.hpp"
+#include "Color.hpp"
 
 #include <optional>
 #include <utility>
-#include <SDL_pixels.h>
 
 using DoubleOpt    = std::optional<double>;
 using DoublePair   = std::pair<std::optional<double>  ,std::optional<double>>;
 using Vector3dPair = std::pair<std::optional<Vector3d>, std::optional<Vector3d>>;
 
 
-inline DoublePair quadratic_roots(const double a, const double b, const double c);
 
-constexpr double DOUBLE_PRECISION5 = 1.0/100000.0;
-inline bool double_equal (const double a,const double b);
-inline bool double_round5(const double d);
+inline bool double_equal(const double a, const double b, const int precision = 5)
+{
+    return abs(a-b) < 1/pow(10,precision);
+}
+inline double double_round(const double d, const int precision = 5)
+{
+    const double precision_mult = pow(10,precision);
+    return round(d*precision_mult)/precision_mult;
+}
+
+inline DoublePair quadratic_roots(const double a, const double b, const double c);
 
 class Line
 {
@@ -32,7 +39,7 @@ class Sphere
 public:
     Vector3d center;
     double radius;
-    SDL_Color color;
+    Color color;
 
     bool contains(const Vector3d& point) const;
     Vector3d normal_at_point(const Vector3d& point) const;

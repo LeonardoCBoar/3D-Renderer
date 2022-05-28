@@ -18,24 +18,24 @@ inline std::vector<Sphere> tutorial_spheres
     {
         Vector3d{0,-1,3},
         1,
-        SDL_Color{255,0,0,255}
+        Color::Red
     },
     Sphere
     {
         Vector3d{2,0,4},
         1,
-        SDL_Color{0,0,255,255}
+        Color::Blue
     },
     Sphere
     {
         Vector3d{-2,0,4},
         1,
-        SDL_Color{0,255,0,255}
+        Color::Green
     },
     Sphere {
         Vector3d{0,-5001,0},
         5000,
-        SDL_Color{255,255,0,255}
+        Color::Yellow
     }
 };
 
@@ -58,7 +58,7 @@ public:
     Vector3d screen_to_viewport(const Vector2i16& screen_pos) const;
 
     std::pair<double,const Sphere*> closest_intersecting_sphere(const Line& ray);
-    SDL_Color raytrace(const Vector3d& ray_dir);
+    Color raytrace(const Vector3d& ray_dir);
 
     std::vector<Sphere> spheres;
     

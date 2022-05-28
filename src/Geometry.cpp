@@ -1,16 +1,6 @@
 #include "Geometry.hpp"
 #include <iomanip>
 
-bool double_equal(const double a, const double b)
-{
-    return abs(a-b) < DOUBLE_PRECISION5;
-}
-
-bool double_round5(const double d)
-{
-    return round(d*DOUBLE_PRECISION5)/DOUBLE_PRECISION5;
-}
-
 DoublePair quadratic_roots(const double a, const double b, const double c)
 {
     const double delta = b*b - 4*a*c;
@@ -45,7 +35,7 @@ Vector3d Line::point_at(const double direction_multiplier) const
 
 bool Sphere::contains(const Vector3d& point) const
 {
-    return (double_round5(point.distance_to(this->center)) <= this->radius);
+    return (double_round(point.distance_to(this->center)) <= this->radius);
 }
 
 Vector3d Sphere::normal_at_point(const Vector3d& point) const

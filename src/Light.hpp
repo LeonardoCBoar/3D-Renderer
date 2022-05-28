@@ -2,8 +2,6 @@
 
 #include <vector>
 
-#include <SDL_pixels.h>
-
 #include "Vector.hpp"
 
 class LightSource
@@ -59,5 +57,5 @@ class SceneLight
     };
 
 public:
-    void apply_all_lights(const Vector3d& point,const Vector3d& normal_at_point,SDL_Color& point_color) const;
+    double total_intensity(const Vector3d& point,const Vector3d& normal_at_point) const;
 };

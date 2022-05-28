@@ -6,7 +6,19 @@
 #include "../src/Light.hpp"
 #include "../src/Vector.hpp"
 #include "../src/Raytracer.hpp"
+#include "../src/Color.hpp"
 
+TEST(GeometryTest, DoubleOperations)
+{
+    EXPECT_EQ(double_round(5.0000000000001),5);
+    EXPECT_EQ(double_round(0.000001),0);
+    EXPECT_EQ(double_round(0.00001),0.00001);
+
+    EXPECT_TRUE(double_equal(5.0000000000001,5));
+    EXPECT_TRUE(double_equal(0.000001,0));
+    EXPECT_FALSE(double_equal(0.00001,0));
+
+}
 
 TEST(GeometryTest, QuadraticRoots)
 {
@@ -89,19 +101,20 @@ TEST(RaytracerTests,ClosestSphere)
         {
             Vector3d(0,0,3),
             1.5,
-            SDL_Color{255,255,255,255}
+            Color::Black
         },
+        
         Sphere
         {
             Vector3d(0,0,1),
             1,
-            SDL_Color{255,255,255,255}
+            Color::Black
         },
         Sphere
         {
             Vector3d(0,0,5),
             5,
-            SDL_Color{255,255,255,255}
+            Color::Black
         }
     };
     Raytracer raytracer{Vectors::ZERO,Vector2u16(1,1),Vector2u16(1,1),1,test_spheres};
@@ -123,19 +136,19 @@ TEST(RaytracerTests,ClosestSphere)
         {
             Vector3d(0,55,0),
             1,
-            SDL_Color{255,255,255,255}
-        },
+            Color::Black
+        }, 
         Sphere
         {
             Vector3d(0,1,0),
             1,
-            SDL_Color{255,255,255,255}
+            Color::Black
         },
         Sphere
         {
             Vector3d(0,55,0),
             5,
-            SDL_Color{255,255,255,255}
+            Color::Black
         }
     };
 
@@ -157,25 +170,25 @@ TEST(RaytracerTests,ClosestSphere)
         {
             Vector3d(0,5,5),
             1,
-            SDL_Color{255,255,255,255}
-        },
+            Color::Black 
+        }, 
         Sphere
         {
             Vector3d(0,-5,5),
             1,
-            SDL_Color{255,255,255,255}
+            Color::Black
         },
         Sphere
         {
             Vector3d(0,-3,3),
             1,
-            SDL_Color{255,255,255,255}
+            Color::Black
         },
         Sphere
         {
             Vector3d(0,0,1),
             0.1,
-            SDL_Color{255,255,255,255}
+            Color::Black
         }
     };
 

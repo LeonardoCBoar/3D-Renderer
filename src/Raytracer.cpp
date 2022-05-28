@@ -54,7 +54,7 @@ std::pair<double,const Sphere*> Raytracer::closest_intersecting_sphere(const Lin
     return std::pair<double,const Sphere*>{closest_sphere_dist,closest_sphere};
 }
 
-SDL_Color Raytracer::raytrace(const Vector3d& ray_dir)
+Color Raytracer::raytrace(const Vector3d& ray_dir)
 {
     const Line ray{this->camera_pos,ray_dir};
 
@@ -63,7 +63,7 @@ SDL_Color Raytracer::raytrace(const Vector3d& ray_dir)
     const double  intersectin_dist = intersection_data.first;
     if(closest_sphere != nullptr)
     {
-        SDL_Color point_color = closest_sphere->color;
+        Color point_color = closest_sphere->color;
         
         const Vector3d intersection_point = ray.point_at(intersectin_dist);
         /*std::cout << intersectin_dist << std::endl;
@@ -71,9 +71,8 @@ SDL_Color Raytracer::raytrace(const Vector3d& ray_dir)
         std::cout << closest_sphere->center.distance_to(intersection_point);*/
         const Vector3d sphere_normal_at_point = closest_sphere->normal_at_point(intersection_point);
 
-        light.apply_all_lights(intersection_point,sphere_normal_at_point,point_color);
-        return point_color; 
+        return point_color * light.total_intensity(intersection_point,sphere_normal_at_point);
     }
     else
-        return SDL_Color{0,0,0,255};
+        return Color::Black; 
 }

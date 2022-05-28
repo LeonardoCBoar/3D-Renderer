@@ -12,6 +12,7 @@ add_executable(RaytracerTests
     ../src/Geometry.cpp
     ../src/Light.cpp
     ../src/Raytracer.cpp
+    ../src/Color.cpp
     )
 
 find_package(SDL2 REQUIRED)

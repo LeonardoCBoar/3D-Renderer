@@ -19,7 +19,7 @@ PointLight::PointLight(const double intensity, const Vector3d& origin)
 
 double PointLight::intensity_at_point(const Vector3d& point,const Vector3d& normal_at_point) const
 {
-    const Vector3d light_dir = this->origin - point ;
+    const Vector3d light_dir = this->origin - point;
     return LightSource::diffuse_reflection(normal_at_point,light_dir);
 }
 
@@ -37,7 +37,7 @@ double DirectionalLight::intensity_at_point(const Vector3d& normal_at_point) con
 
 
 
-void SceneLight::apply_all_lights(const Vector3d& point,const Vector3d& normal_at_point,SDL_Color& point_color) const
+double SceneLight::total_intensity(const Vector3d& point,const Vector3d& normal_at_point) const
 {
     double intensity_at_point = ambient_light;
 
@@ -51,8 +51,5 @@ void SceneLight::apply_all_lights(const Vector3d& point,const Vector3d& normal_a
         intensity_at_point += directional_light.intensity_at_point(normal_at_point);
     }
 
-    point_color.r *= intensity_at_point;
-    point_color.g *= intensity_at_point;
-    point_color.b *= intensity_at_point;
-
+    return intensity_at_point;
 }

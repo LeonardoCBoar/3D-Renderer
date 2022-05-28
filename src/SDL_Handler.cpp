@@ -92,7 +92,7 @@ void SDL_Handler::render_screen()
         {
             const Vector2i16 screen_pos{x,y};
             const Vector3d dir = raytracer.screen_to_viewport(screen_pos);
-            const SDL_Color color = raytracer.raytrace(dir);
+            const Color color = raytracer.raytrace(dir);
             SDL_SetRenderDrawColor(renderer,color.r,color.g,color.b,color.a);
             SDL_RenderDrawPoint(renderer,x+SCREEN_SIZE.x/2,-y + SCREEN_SIZE.y/2);
         }
