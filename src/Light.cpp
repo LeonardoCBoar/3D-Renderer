@@ -2,7 +2,8 @@
 
 double LightSource::diffuse_reflection(const Vector3d& normal_at_point, const Vector3d& light_dir) const
 {
-    const double intensity_ratio = light_dir.cos_between(normal_at_point);
+    //const double intensity_ratio = light_dir.cos_between(normal_at_point);
+    const double intensity_ratio = (normal_at_point.dot(light_dir)) / (normal_at_point.length()*light_dir.length());
 
     if(intensity_ratio<0)
         return 0.0;
@@ -19,7 +20,7 @@ PointLight::PointLight(const double intensity, const Vector3d& origin)
 
 double PointLight::intensity_at_point(const Vector3d& point,const Vector3d& normal_at_point) const
 {
-    const Vector3d light_dir = point - this->origin;
+    const Vector3d light_dir = this->origin - point ;
     return LightSource::diffuse_reflection(normal_at_point,light_dir);
 }
 

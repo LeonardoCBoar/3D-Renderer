@@ -1,8 +1,14 @@
 #include "Geometry.hpp"
+#include <iomanip>
 
-Vector3d Line::point_at(const double direction_multiplier) const
+bool double_equal(const double a, const double b)
 {
-    return this->origin + this->direction * direction_multiplier;
+    return abs(a-b) < DOUBLE_PRECISION5;
+}
+
+bool double_round5(const double d)
+{
+    return round(d*DOUBLE_PRECISION5)/DOUBLE_PRECISION5;
 }
 
 DoublePair quadratic_roots(const double a, const double b, const double c)
@@ -32,8 +38,23 @@ DoublePair quadratic_roots(const double a, const double b, const double c)
         return DoublePair{root1,root2};
 }
 
+Vector3d Line::point_at(const double direction_multiplier) const
+{
+    return this->origin + this->direction * direction_multiplier;
+}
+
+bool Sphere::contains(const Vector3d& point) const
+{
+    return (double_round5(point.distance_to(this->center)) <= this->radius);
+}
+
 Vector3d Sphere::normal_at_point(const Vector3d& point) const
 {
+    if(!this->contains(point))
+    {
+        std::cout << "Point " << point << " Outside sphere " << *this << std::endl;
+        std::terminate();
+    }
     const Vector3d center_to_point = point - this->center;
     return center_to_point / (center_to_point.length());
 }
@@ -68,5 +89,10 @@ Vector3dPair Sphere::ray_intersection_points(const Line& ray) const
     
     return Vector3dPair{point1,point2};
 
+}
+
+bool Sphere::operator==(const Sphere& other)
+{
+    return this->radius == other.radius && this->center == other.center;
 }
 

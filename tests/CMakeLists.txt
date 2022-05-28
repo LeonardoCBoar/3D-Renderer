@@ -8,8 +8,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED true)
 
 
 add_executable(RaytracerTests
-    VectorTest.cpp
+    Tests.cpp
     ../src/Geometry.cpp
+    ../src/Light.cpp
+    ../src/Raytracer.cpp
     )
 
 find_package(SDL2 REQUIRED)

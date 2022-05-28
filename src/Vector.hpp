@@ -25,6 +25,12 @@ public:
 
     }
 
+    template<typename OtherNumberT>
+    bool operator == (const Vector3<OtherNumberT>& other) const
+    {
+        return this->x == other.x && this->y == other.y && this->z == other.z;
+    }
+
     Vector3<NumberT> operator + (const Vector3<NumberT>& other) const
     {
         return Vector3<NumberT>(this->x + other.x, this->y + other.y, this->z + other.z);
@@ -33,6 +39,11 @@ public:
     Vector3<NumberT> operator - (const Vector3<NumberT>& other) const
     {
         return Vector3<NumberT>(this->x - other.x, this->y - other.y, this->z - other.z);
+    }
+
+    Vector3<NumberT> operator - () const
+    {
+        return Vector3<NumberT>(-this->x,-this->y,-this->z);
     }
 
     Vector3<NumberT> operator * (const Vector3<NumberT>& other) const
@@ -69,10 +80,16 @@ public:
 
     double angle_to(const Vector3<NumberT>& other) const
     {
-        acos(this->cos_between(other));
+        return acos(this->cos_between(other));
     }
 
-    float length() const
+    double distance_to(const Vector3<NumberT>& other) const
+    {
+        return (*this-other).length();
+    }
+
+
+    double length() const
     {
         return sqrt( (this->x*this->x) + (this->y*this->y) + (this->z*this->z) );
     }
@@ -152,3 +169,9 @@ using Vector2u32 = Vector2<uint32_t>;
 using Vector2i16 = Vector2<int16_t>;
 using Vector2i32 = Vector2<int16_t>;
 using Vector2d   = Vector2<double>;
+
+namespace Vectors
+{
+    inline Vector3d ZERO{0,0,0};
+    inline Vector3d ONE {1,1,1};
+}
