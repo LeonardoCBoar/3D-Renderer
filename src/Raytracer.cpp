@@ -71,8 +71,8 @@ Color Raytracer::raytrace(const Vector3d& ray_dir)
         std::cout << closest_sphere->center.distance_to(intersection_point);*/
         const Vector3d sphere_normal_at_point = closest_sphere->normal_at_point(intersection_point);
 
-        return point_color * light.total_intensity(intersection_point,sphere_normal_at_point);
+        return point_color * light.total_intensity(intersection_point,sphere_normal_at_point,-ray_dir,closest_sphere->shine_level);
     }
     else
-        return Color::Black; 
+        return Color::White; 
 }

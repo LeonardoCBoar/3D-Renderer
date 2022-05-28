@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdint.h>
+#include <algorithm>
 
 class Color
 {
@@ -15,9 +16,9 @@ public:
     {
         return Color
         {
-            static_cast<uint8_t>(this->r*factor),
-            static_cast<uint8_t>(this->g*factor),
-            static_cast<uint8_t>(this->b*factor)
+            static_cast<uint8_t>(std::min(this->r*factor,255.0)),
+            static_cast<uint8_t>(std::min(this->g*factor,255.0)),
+            static_cast<uint8_t>(std::min(this->b*factor,255.0))
         };
     }
 

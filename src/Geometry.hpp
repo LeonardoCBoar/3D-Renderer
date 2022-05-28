@@ -40,6 +40,7 @@ public:
     Vector3d center;
     double radius;
     Color color;
+    int shine_level;
 
     bool contains(const Vector3d& point) const;
     Vector3d normal_at_point(const Vector3d& point) const;

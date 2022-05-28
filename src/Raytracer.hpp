@@ -18,24 +18,28 @@ inline std::vector<Sphere> tutorial_spheres
     {
         Vector3d{0,-1,3},
         1,
-        Color::Red
+        Color::Red,
+        500
     },
     Sphere
     {
         Vector3d{2,0,4},
         1,
-        Color::Blue
+        Color::Blue,
+        500
     },
     Sphere
     {
         Vector3d{-2,0,4},
         1,
-        Color::Green
+        Color::Green,
+        10
     },
     Sphere {
         Vector3d{0,-5001,0},
         5000,
-        Color::Yellow
+        Color::Yellow,
+        1000
     }
 };
 

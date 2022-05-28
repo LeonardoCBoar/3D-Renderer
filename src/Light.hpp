@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <math.h>
 
 #include "Vector.hpp"
 
@@ -8,7 +9,9 @@ class LightSource
 {
 public:
     double intensity;
-    double diffuse_reflection(const Vector3d& normal_at_point, const Vector3d& light_dir) const;
+    double diffuse_reflection (const Vector3d& normal_at_point, const Vector3d& light_dir) const;
+    double specular_reflection(const Vector3d& normal_at_point, const Vector3d& light_dir,
+                               const Vector3d& camera_dir, const double specularity) const;
 };
 
 
@@ -18,7 +21,8 @@ public:
     Vector3d origin;
 
     PointLight(const double intensity,const Vector3d& origin);
-    double intensity_at_point(const Vector3d& point,const Vector3d& normal_at_point) const;
+    double intensity_at_point(const Vector3d& point,const Vector3d& normal_at_point,
+                              const Vector3d& camera_dir, const double specularity) const;
 };
 
 
@@ -29,7 +33,8 @@ public:
 
     DirectionalLight(const double intensity, const Vector3d& direction);
 
-    double intensity_at_point(const Vector3d& normal_at_point) const;
+    double intensity_at_point(const Vector3d& normal_at_point,
+                              const Vector3d& camera_dir, const double specularity) const;
 };
 
 
@@ -57,5 +62,6 @@ class SceneLight
     };
 
 public:
-    double total_intensity(const Vector3d& point,const Vector3d& normal_at_point) const;
+    double total_intensity(const Vector3d& point,const Vector3d& normal_at_point,
+                           const Vector3d& camera_dir, const double specularity) const;
 };
