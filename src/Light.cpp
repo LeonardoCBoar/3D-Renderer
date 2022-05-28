@@ -2,8 +2,7 @@
 
 double LightSource::diffuse_reflection(const Vector3d& normal_at_point, const Vector3d& light_dir) const
 {
-    //const double intensity_ratio = light_dir.cos_between(normal_at_point);
-    const double intensity_ratio = (normal_at_point.dot(light_dir)) / (normal_at_point.length()*light_dir.length());
+    const double intensity_ratio = light_dir.cos_between(normal_at_point);
 
     if(intensity_ratio<0)
         return 0.0;
